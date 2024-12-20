@@ -1,7 +1,14 @@
+// Import Context และ React
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import UserContext from "../contexts/UserContext";
 
 function ViewProductPage() {
   const navigate = useNavigate();
+
+  // ใช้ useContext เพื่อดึงข้อมูล level จาก Context
+  const user = useContext(UserContext);
+
   return (
     <div>
       <h1>View Product Page</h1>
@@ -10,12 +17,13 @@ function ViewProductPage() {
         <p>Content</p>
       </div>
 
+      {/* แสดงข้อความพร้อม level */}
       <div className="product-promotion-box">
-        <h2>คุณคือสมาชิกในระดับ (x) ดังนั้นคุณได้สิทธิพิเศษลด 50%</h2>
-        <button onClick={() => alert("🥳🥳🥳🥳")}>กดรับสิทธิ</button>
+        <h2>คุณคือสมาชิกในระดับ {user.level} ดังนั้นคุณได้สิทธิพิเศษลด 50%</h2>
+        <button onClick={function () { alert("🥳🥳🥳🥳"); }}>กดรับสิทธิ</button>
       </div>
 
-      <button onClick={() => navigate("/")}>Back to Home</button>
+      <button onClick={function () { navigate("/"); }}>Back to Home</button>
     </div>
   );
 }
